@@ -1,0 +1,16 @@
+{
+  "sources": {
+    "actuals": {
+      "url": "https://data.elexon.co.uk/bmrs/api/v1/datasets/FUELHH/stream?settlementDateFrom=2026-01-02&settlementDateTo=2026-02-01&fuelType=WIND",
+      "rows": 1488,
+      "sha256": "65402b5dde43a2bd28bb71edd345371a06006247e0e134ccba20c8ecfec93ba3",
+      "fileRetrievedAt": "2026-10-26T20:24:53.257031+00:00"
+    },
+    "forecasts": {
+      "url": "https://data.elexon.co.uk/bmrs/api/v1/datasets/WINDFOR/stream?publishDateTimeFrom=2025-12-30T00%3A00%3A00Z&publishDateTimeTo=2026-02-01T00%3A00%3A00Z",
+      "rows": 19272,
+      "sha256": "3e59c8cd6558a8a7e13583bfee09d14872c7f140d112abb34e27b2b53bf3940b",
+      "fileRetrievedAt": "2026-10-26T20:27:20.974661+00:00"
+    }
+  }
+}

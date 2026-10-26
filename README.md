@@ -6,7 +6,7 @@ A React and Python research pilot for the Gridbricks Full Stack SWE challenge. I
 
 ## AI assistance disclosure
 
-AI assistance was used to design and implement the application, retrieve and inspect public API documentation, write tests, and prepare documentation. The candidate should review the code and explain it in their own walkthrough. This is not represented as unaided work. No generative model is used to invent data or forecast values at runtime.
+AI assistance was used to design and implement the application, retrieve and inspect public API documentation, write tests, and prepare documentation. Review the code and explain it honestly in the walkthrough. This is not represented as unaided work. No generative model is used to invent data or forecast values at runtime.
 
 ## Run locally
 
@@ -72,7 +72,7 @@ Heroku Eco currently costs $5/month; it was not selected because this project ha
 
 - Review the code and reproduce the tests.
 - Obtain approval for a public repo with an anonymous/random **repository name**, public deployment, resume sharing and unlisted YouTube publication. An anonymous repo name does not anonymize its owner or commit metadata.
-- Follow the owner's GitHub change-review/PR workflow.
+- Keep code changes reviewable through pull requests.
 - Record a maximum 10-minute walkthrough: customer pitch and technical review, with initial overview no more than 5 minutes for each part. See `docs/walkthrough.md`.
 - Verify all submitted links without signed-in access. The assessment says evaluation starts with the video and not to submit without it.
 - Fill the submission form only with genuine completed deliverables and reviewed truthful answers. Build authorization is not submission authorization.

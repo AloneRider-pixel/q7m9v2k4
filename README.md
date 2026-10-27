@@ -2,7 +2,7 @@
 
 A React and Python research pilot for the Gridbricks Full Stack SWE challenge. It shows the wind forecasts available at a selected January 2026 decision time and compares them with retrospective Elexon wind actuals.
 
-**Status:** source build and local browser tests passed. Not publicly deployed. No reviewer-accessible app URL, public repository URL, or unlisted video exists yet. The Dockerfile is supplied but could not be executed in the build environment because Docker was unavailable. Do not describe those steps as complete.
+**Status:** source build and local browser tests passed. Not publicly deployed. Public source is on the open build/wind-pilot pull request, not yet merged to main. No reviewer-accessible deployed app URL or unlisted video exists yet. The Dockerfile is supplied but could not be executed in the build environment because Docker was unavailable. Do not describe those steps as complete.
 
 ## AI assistance disclosure
 
@@ -71,7 +71,7 @@ Heroku Eco currently costs $5/month; it was not selected because this project ha
 ## Submission checklist
 
 - Review the code and reproduce the tests.
-- Obtain approval for a public repo with an anonymous/random **repository name**, public deployment, resume sharing and unlisted YouTube publication. An anonymous repo name does not anonymize its owner or commit metadata.
+- Public random-name repository creation and eligible free Vercel deployment were approved. Vercel sign-in identity is now confirmed as AloneRider-pixel GitHub; safe authenticated access remains unresolved. Resume sharing and unlisted YouTube publication still require their own approval. An anonymous repo name does not anonymize its owner or commit metadata.
 - Keep code changes reviewable through pull requests.
 - Record a maximum 10-minute walkthrough: customer pitch and technical review, with initial overview no more than 5 minutes for each part. See `docs/walkthrough.md`.
 - Verify all submitted links without signed-in access. The assessment says evaluation starts with the video and not to submit without it.

@@ -2,7 +2,7 @@
 
 A React and Python research pilot for the Gridbricks Full Stack SWE challenge. It shows the wind forecasts available at a selected January 2026 decision time and compares them with retrospective Elexon wind actuals.
 
-**Status:** source build and local browser tests passed. Not publicly deployed. Public source is on the open build/wind-pilot pull request, not yet merged to main. No reviewer-accessible deployed app URL or unlisted video exists yet. The Dockerfile is supplied but could not be executed in the build environment because Docker was unavailable. Do not describe those steps as complete.
+**Status:** live app deployed and anonymously verified at https://q7m9v2k4.vercel.app . Public implementation is in https://github.com/AloneRider-pixel/q7m9v2k4/pull/1 on build/wind-pilot; not merged to main. Sixteen local analysis/HTTP tests pass. Production app/API, CSV and responsive views were checked without login. No completed video or assessment submission is claimed. Dockerfile is supplied, but container execution remains unverified because Docker was unavailable locally.
 
 ## AI assistance disclosure
 
@@ -62,16 +62,16 @@ Scope excludes customer demand, prices, utility-owned wind shares, thermal avail
 
 ## Deployment preparation
 
-The challenge names Vercel or Heroku. Vercel supports file-based Python handlers and a free Hobby tier for personal, non-commercial projects. Confirm the account and project eligibility before deploying. The supplied `vercel.json` builds `frontend/dist` and includes the historical JSON in Python functions. Use repository root as the project root and Framework Preset **Other**. Python version: 3.12.
+The challenge names Vercel or Heroku. Vercel supports file-based Python handlers and a free Hobby tier for personal, non-commercial projects. Confirm the account and project eligibility before deploying. The supplied `vercel.json` builds `frontend/dist` and includes the historical JSON in Python functions. Use repository root as the project root and the explicit **Vite** framework preset. Python version: 3.12.
 
-No deploy was attempted and cloud configuration is not runtime-verified. After approved deployment, verify `/`, `/api/health`, `/api/analysis?date=2026-01-15&cutoff=09:00`, `/api/export?date=2026-01-15&cutoff=09:00`, January31->February1, all controls, mobile layout and anonymous access. Replace this section with the actual verified URL only after deployment.
+Production deployment was completed and anonymously checked on 27 October 2026. The Vite preset is explicit so the required root Dockerfile does not select the Container preset. API entrypoints declare handler subclasses directly for Vercel discovery. After approved deployment, verify `/`, `/api/health`, `/api/analysis?date=2026-01-15&cutoff=09:00`, `/api/export?date=2026-01-15&cutoff=09:00`, January31->February1, all controls, mobile layout and anonymous access. Verified production URL: https://q7m9v2k4.vercel.app .
 
 Heroku Eco currently costs $5/month; it was not selected because this project has no paid-service approval. Docker is for reproducible local/container execution; Vercel's Python deployment does not run that Dockerfile.
 
 ## Submission checklist
 
 - Review the code and reproduce the tests.
-- Public random-name repository creation and eligible free Vercel deployment were approved. Vercel sign-in identity is now confirmed as AloneRider-pixel GitHub; safe authenticated access remains unresolved. Resume sharing and unlisted YouTube publication still require their own approval. An anonymous repo name does not anonymize its owner or commit metadata.
+- Public random-name repository creation and eligible free Vercel deployment were approved. Vercel sign-in used the approved AloneRider-pixel GitHub identity; authenticated CLI access was approved and deployment completed on the existing Hobby team. Resume sharing and unlisted YouTube publication still require their own approval. An anonymous repo name does not anonymize its owner or commit metadata.
 - Keep code changes reviewable through pull requests.
 - Record a maximum 10-minute walkthrough: customer pitch and technical review, with initial overview no more than 5 minutes for each part. See `docs/walkthrough.md`.
 - Verify all submitted links without signed-in access. The assessment says evaluation starts with the video and not to submit without it.

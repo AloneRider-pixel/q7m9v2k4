@@ -1,2 +1,4 @@
 from backend.server import Handler
-handler = Handler
+
+class handler(Handler):
+    pass

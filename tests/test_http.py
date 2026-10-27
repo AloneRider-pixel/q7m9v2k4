@@ -34,7 +34,8 @@ class HandlerTests(unittest.TestCase):
   from api.analysis import handler as a
   from api.health import handler as b
   from api.export import handler as c
-  self.assertIs(a,b);self.assertIs(a,c)
+  from backend.server import Handler
+  self.assertTrue(all(issubclass(x,Handler) for x in [a,b,c]))
  def test_vercel_include_glob(self):
   d=json.loads((ROOT/'vercel.json').read_text());self.assertIsInstance(d['functions']['api/*.py']['includeFiles'],str)
 if __name__=='__main__':unittest.main()

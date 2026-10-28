@@ -74,8 +74,8 @@ jobs:
           echo "data rows: $rows"
           test "$rows" -eq 24
 
-      - name: Unit tests inside the container
-        run: docker exec app python -m unittest discover -s tests -v
+      - name: Unit tests inside the container image
+        run: docker run --rm -v "$PWD/tests:/app/tests:ro" -w /app wind-decision-lab python -m unittest discover -s tests -v
 
       - name: Show container logs
         if: always()

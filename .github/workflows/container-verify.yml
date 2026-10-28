@@ -1,0 +1,82 @@
+name: container-verify
+
+on:
+  push:
+    paths:
+      - ".github/workflows/container-verify.yml"
+  workflow_dispatch:
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t wind-decision-lab .
+
+      - name: Start container
+        run: |
+          docker run -d --name app -p 8000:8000 wind-decision-lab
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:8000/api/health > /dev/null 2>&1; then
+              echo "App is up after ${i} tries"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "App did not become healthy in time"
+          docker logs app
+          exit 1
+
+      - name: Health endpoint
+        run: |
+          curl -sf http://localhost:8000/api/health | tee /tmp/health.json
+          grep -q '"status": "ok"' /tmp/health.json
+
+      - name: Homepage loads and shows app title
+        run: |
+          curl -sf http://localhost:8000/ | tee /tmp/home.html
+          grep -qi 'Wind Decision Lab' /tmp/home.html
+
+      - name: Analysis endpoint - Jan 15 2026, cutoff 09:00
+        run: |
+          curl -sf "http://localhost:8000/api/analysis?date=2026-01-15&cutoff=09:00" | tee /tmp/analysis.json
+          python3 - <<'PYEOF'
+          import json
+          d = json.load(open("/tmp/analysis.json"))
+          print("deliveryDate:", d["deliveryDate"])
+          print("metrics:", d["metrics"])
+          assert d["deliveryDate"] == "2026-01-15", d["deliveryDate"]
+          m = d["metrics"]
+          assert m["n"] == 24, m
+          print("Jan-15 analysis OK")
+          PYEOF
+
+      - name: Overnight spill - Jan 31 2026, cutoff 09:00
+        run: |
+          curl -sf "http://localhost:8000/api/analysis?date=2026-01-31&cutoff=09:00" | tee /tmp/analysis2.json
+          python3 - <<'PYEOF'
+          import json
+          d = json.load(open("/tmp/analysis2.json"))
+          print("deliveryDate:", d["deliveryDate"])
+          print("metrics:", d["metrics"])
+          assert d["deliveryDate"] == "2026-02-01", d["deliveryDate"]
+          print("Jan-31 overnight spill OK")
+          PYEOF
+
+      - name: CSV export - 24 hourly rows
+        run: |
+          curl -sf "http://localhost:8000/api/export?date=2026-01-15&cutoff=09:00" -o /tmp/export.csv
+          head -3 /tmp/export.csv
+          rows=$(( $(wc -l < /tmp/export.csv) - 1 ))
+          echo "data rows: $rows"
+          test "$rows" -eq 24
+
+      - name: Unit tests inside the container
+        run: docker exec app python -m unittest discover -s tests -v
+
+      - name: Show container logs
+        if: always()
+        run: docker logs app | tail -40

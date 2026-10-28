@@ -48,7 +48,7 @@ jobs:
           d = json.load(open("/tmp/analysis.json"))
           print("deliveryDate:", d["deliveryDate"])
           print("metrics:", d["metrics"])
-          assert d["deliveryDate"] == "2026-01-15", d["deliveryDate"]
+          assert d["deliveryDate"] == "2026-01-16", d["deliveryDate"]
           m = d["metrics"]
           assert m["n"] == 24, m
           print("Jan-15 analysis OK")

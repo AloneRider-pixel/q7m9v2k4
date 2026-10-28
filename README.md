@@ -2,7 +2,7 @@
 
 A React and Python research pilot for the Gridbricks Full Stack SWE challenge. It shows the wind forecasts available at a selected January 2026 decision time and compares them with retrospective Elexon wind actuals.
 
-**Status:** live app deployed and anonymously verified at https://q7m9v2k4.vercel.app . Public implementation is in https://github.com/AloneRider-pixel/q7m9v2k4/pull/1 on build/wind-pilot; not merged to main. Sixteen local analysis/HTTP tests pass. Production app/API, CSV and responsive views were checked without login. No completed video or assessment submission is claimed. Dockerfile is supplied, but container execution remains unverified because Docker was unavailable locally.
+**Status:** live app deployed and anonymously verified at https://q7m9v2k4.vercel.app . Public implementation is merged to main in https://github.com/AloneRider-pixel/q7m9v2k4 (PR #1). Sixteen analysis/HTTP tests pass, verified in CI inside the built container. Production app/API, CSV and responsive views were checked without login. No completed video or assessment submission is claimed. The Dockerfile builds and the container runs, verified by the container-verify GitHub Actions workflow: endpoint checks plus all sixteen tests inside the container image (run: https://github.com/AloneRider-pixel/q7m9v2k4/actions/runs/40742031820 ).
 
 ## AI assistance disclosure
 
@@ -31,7 +31,7 @@ docker build -t wind-decision-lab .
 docker run --rm -p 8000:8000 wind-decision-lab
 ```
 
-Multi-stage build: Node builds the React bundle; Python serves it as an unprivileged user. Container execution remains unverified until run on a Docker-equipped machine.
+Multi-stage build: Node builds the React bundle; Python serves it as an unprivileged user. Container build and runtime are verified by the container-verify GitHub Actions workflow (.github/workflows/container-verify.yml): it builds the image, starts the container, checks /api/health, the homepage, /api/analysis including the January 31 to February 1 overnight spill, and /api/export, then runs all sixteen unit tests inside the container image. Latest verified run: https://github.com/AloneRider-pixel/q7m9v2k4/actions/runs/40742031820
 
 ## Directory map
 
@@ -45,7 +45,7 @@ Multi-stage build: Node builds the React bundle; Python serves it as an unprivil
 - `data/refresh.py`: optional one-shot refresh from the named public APIs, not a poller.
 - `tests/`: deterministic edge-case and no-hindsight tests.
 - `docs/`: analysis findings, verification and walkthrough guide.
-- `Dockerfile`, `vercel.json`: deployment preparation, not evidence of deployment.
+- `Dockerfile`, `vercel.json`: deployment configuration; the Dockerfile container build and runtime are verified in CI (see Docker section).
 
 ## Method
 
